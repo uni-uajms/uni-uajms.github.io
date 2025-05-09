@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Práctico N°1 - Programación Lineal</title>
+  <script src="https://jsxgraph.org/distrib/jsxgraphcore.js"></script>
+  <link rel="stylesheet" href="https://jsxgraph.org/distrib/jsxgraph.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F8F5F2;
+      color: #625238;
+    }
+    nav {
+      background-color: #EDE7DE;
+      display: flex;
+      border-bottom: 1px solid #625238;
+    }
+    nav button {
+      flex: 1;
+      padding: 1em;
+      background: #EDE7DE;
+      color: #625238;
+      border: none;
+      cursor: pointer;
+    }
+    nav button:hover {
+      background-color: #f8f5f8;
+    }
+    nav button.active {
+      background-color: #f8f5f8;
+      border-bottom: 3px solid #625238;
+    }
+    section {
+      display: none;
+      padding: 2em;
+    }
+    section.active {
+      display: block;
+    }
+    .board {
+      width: 600px;
+      height: 600px;
+      margin-top: 1em;
+      background-color: #F5F1EB;
+      border: 2px solid #E2D8C5;
+      border-radius: 8px;
+    }
+    .resolucion {
+      background-color: #F5F1EB;
+      border: 2px solid #E2D8C5;
+      padding: 1em;
+      margin-top: 1em;
+      border-radius: 8px;
+    }
+    th, td {
+      border: 2px solid #625238;
+      padding: .5rem 1rem;
+    }
+    table {
+      border-collapse: collapse;
+      margin: 1em 0;
+    }
+    .factible {
+      background-color: #8EB79D;
+    }
+    h3 {
+      margin-top: 1.5em;
+      border-bottom: 1px solid #625238;
+      padding-bottom: 0.5em;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <button id="btn0" onclick="showTab(0)" class="active">Ejercicio 1</button>
+    <button id="btn1" onclick="showTab(1)">Ejercicio 2</button>
+    <button id="btn2" onclick="showTab(2)">Ejercicio 3</button>
+    <button id="btn3" onclick="showTab(3)">Ejercicio 4</button>
+    <button id="btn4" onclick="showTab(4)">Ejercicio 5</button>
+  </nav>
+
+  <section class="active">
+    <h2>Ejercicio 1 - Aires Acondicionados</h2>
+    <div class="resolucion">
+      <h3>Modelo</h3>
+      <p><strong>Variables de decisión:</strong></p>
+      <ul>
+        <li>X = cantidad de aires acondicionados Supercraft a producir</li>
+        <li>Y = cantidad de aires acondicionados Powermax a producir</li>
+      </ul>
+      <p><strong>Función objetivo:</strong></p>
+      <p>Maximizar Z = 600X + 700Y</p>
+
+      <p><strong>Restricciones:</strong></p>
+      <ul>
+        <li>Área 1: X + 2Y ≤ 140</li>
+        <li>Área 2: 2X + 2Y ≤ 190</li>
+        <li>Área 3: 3X + 2Y ≤ 240</li>
+        <li>X ≥ 0, Y ≥ 0</li>
+      </ul>
+    </div>
+    <h3>Resolución Gráfica</h3>
+    <div id="jxgbox1" class="board"></div>
+    <div class="resolucion">
+      <h3>Puntos Críticos y Valores de la Función Objetivo</h3>
+      <table>
+        <tr>
+          <th>Punto</th>
+          <th>Coordenada X</th>
+          <th>Coordenada Y</th>
+          <th>Z = 600X + 700Y</th>
+        </tr>
+        <tr>
+          <td>Origen</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>0</td>
+          <td>70</td>
+          <td>49,000</td>
+        </tr>
+        <tr class="factible">
+          <td>G</td>
+          <td>50</td>
+          <td>45</td>
+          <td>61,500</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>80</td>
+          <td>0</td>
+          <td>48,000</td>
+        </tr>
+      </table>
+      <p><strong>Solución óptima:</strong></p>
+      <p>X = 50 unidades de Supercraft</p>
+      <p>Y = 45 unidades de Powermax</p>
+      <p>Valor máximo de la función objetivo: Z = 61,500</p>
+      
+      <h3>Análisis de Sensibilidad</h3>
+      <p><strong>1. Coeficientes de la función objetivo:</strong></p>
+      <ul>
+        <li>Si el coeficiente de X (600) aumenta, la pendiente de la función objetivo cambiaría pero la solución óptima se mantendría en el punto G(50,45) mientras el aumento no sea tan significativo.</li>
+        <li>Si el coeficiente de Y (700) aumenta, eventualmente la solución óptima podría moverse hacia el punto A(0,70).</li>
+      </ul>
+      
+      <p><strong>2. Términos independientes de las restricciones:</strong></p>
+      <ul>
+        <li>Restricción del Área 1 (X + 2Y ≤ 140): Si aumenta de 140 a un valor mayor, la recta se desplaza hacia arriba, lo que podría permitir mayor producción.</li>
+        <li>Restricción del Área 2 (2X + 2Y ≤ 190): Si aumenta de 190 a un valor mayor, la recta se desplaza hacia arriba, lo que podría permitir mayor producción.</li>
+        <li>Restricción del Área 3 (3X + 2Y ≤ 240): Si aumenta de 240 a un valor mayor, la recta se desplaza hacia arriba, lo que podría permitir mayor producción.</li>
+      </ul>
+      
+      <p><strong>3. Restricciones activas:</strong></p>
+      <p>En la solución óptima (50,45), las restricciones activas son:</p>
+      <ul>
+        <li>Área 1: X + 2Y = 140 ↔ 50 + 2(45) = 140 ✓</li>
+        <li>Área 3: 3X + 2Y = 240 ↔ 3(50) + 2(45) = 240 ✓</li>
+      </ul>
+      <p>La restricción del Área 2 no es activa: 2(50) + 2(45) = 190, lo que significa que esta restricción está en su límite pero no determina la solución óptima por sí sola.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ejercicio 2 - Fábrica Deportiva</h2>
+    <div class="resolucion">
+      <h3>Modelo</h3>
+      <p><strong>Variables de decisión:</strong></p>
+      <ul>
+        <li>X = cantidad de top a producir</li>
+        <li>Y = cantidad de chores a producir</li>
+      </ul>
+      <p><strong>Función objetivo:</strong></p>
+      <p>Maximizar Z = 8X + 5Y</p>
+
+      <p><strong>Restricciones:</strong></p>
+      <ul>
+        <li>Máquina de cortar: X + Y ≤ 7</li>
+        <li>Máquina de coser: 3X + Y ≤ 11</li>
+        <li>Máquina de teñir: X ≤ 3</li>
+        <li>X ≥ 0, Y ≥ 0</li>
+      </ul>
+    </div>
+    <h3>Resolución Gráfica</h3>
+    <div id="jxgbox2" class="board"></div>
+    <div class="resolucion">
+      <h3>Puntos Críticos y Valores de la Función Objetivo</h3>
+      <table>
+        <tr>
+          <th>Punto</th>
+          <th>Coordenada X</th>
+          <th>Coordenada Y</th>
+          <th>Z = 8X + 5Y</th>
+        </tr>
+        <tr>
+          <td>Origen</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>0</td>
+          <td>7</td>
+          <td>35</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>0</td>
+          <td>11</td>
+          <td>55</td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td>3</td>
+          <td>2</td>
+          <td>34</td>
+        </tr>
+        <tr class="factible">
+          <td>D</td>
+          <td>3</td>
+          <td>4</td>
+          <td>44</td>
+        </tr>
+        <tr>
+          <td>E</td>
+          <td>7</td>
+          <td>0</td>
+          <td>56</td>
+        </tr>
+      </table>
+      <p><strong>Solución óptima:</strong></p>
+      <p>X = 3 top</p>
+      <p>Y = 4 chores</p>
+      <p>Valor máximo de la función objetivo: Z = 44</p>
+      
+      <h3>Análisis de Sensibilidad</h3>
+      <p><strong>1. Coeficientes de la función objetivo:</strong></p>
+      <ul>
+        <li>Si el coeficiente de X (8) aumenta, la solución óptima se mantendría en el punto D(3,4) hasta cierto punto, luego podría desplazarse hacia el punto E(7,0).</li>
+        <li>Si el coeficiente de Y (5) aumenta significativamente, la solución óptima podría moverse hacia el punto B(0,11).</li>
+      </ul>
+      
+      <p><strong>2. Términos independientes de las restricciones:</strong></p>
+      <ul>
+        <li>Máquina de cortar (X + Y ≤ 7): Si aumenta de 7 a un valor mayor, permitiría mayor producción y podría cambiar la solución óptima.</li>
+        <li>Máquina de coser (3X + Y ≤ 11): Si aumenta de 11 a un valor mayor, permitiría mayor producción y podría cambiar la solución óptima.</li>
+        <li>Máquina de teñir (X ≤ 3): Un aumento en este valor permitiría producir más tops, lo que probablemente mejoraría la función objetivo.</li>
+      </ul>
+      
+      <p><strong>3. Restricciones activas:</strong></p>
+      <p>En la solución óptima (3,4), las restricciones activas son:</p>
+      <ul>
+        <li>Máquina de cortar: X + Y = 7 ↔ 3 + 4 = 7 ✓</li>
+        <li>Máquina de teñir: X = 3 ↔ 3 = 3 ✓</li>
+      </ul>
+      <p>La restricción de la máquina de coser no es activa: 3(3) + 4 = 13, lo que es menor que 11, por lo que no afecta directamente a la solución óptima.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ejercicio 3 - Pastelería</h2>
+    <div class="resolucion">
+      <h3>Modelo</h3>
+      <p><strong>Variables de decisión:</strong></p>
+      <ul>
+        <li>X = cantidad de tortas T1 a producir</li>
+        <li>Y = cantidad de tortas T2 a producir</li>
+      </ul>
+      <p><strong>Función objetivo:</strong></p>
+      <p>Maximizar Z = 10X + 23Y</p>
+
+      <p><strong>Restricciones:</strong></p>
+      <ul>
+        <li>Ingrediente A: X + 5Y ≤ 150</li>
+        <li>Ingrediente B: X + 2Y ≤ 90</li>
+        <li>Ingrediente C: 2X + Y ≤ 150</li>
+        <li>X ≥ 0, Y ≥ 0</li>
+      </ul>
+    </div>
+    <h3>Resolución Gráfica</h3>
+    <div id="jxgbox3" class="board"></div>
+    <div class="resolucion">
+      <h3>Puntos Críticos y Valores de la Función Objetivo</h3>
+      <table>
+        <tr>
+          <th>Punto</th>
+          <th>Coordenada X</th>
+          <th>Coordenada Y</th>
+          <th>Z = 10X + 23Y</th>
+        </tr>
+        <tr>
+          <td>Origen</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>0</td>
+          <td>30</td>
+          <td>690</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>0</td>
+          <td>45</td>
+          <td>1,035</td>
+        </tr>
+        <tr class="factible">
+          <td>C</td>
+          <td>30</td>
+          <td>30</td>
+          <td>990</td>
+        </tr>
+        <tr>
+          <td>D</td>
+          <td>75</td>
+          <td>0</td>
+          <td>750</td>
+        </tr>
+        <tr>
+          <td>E</td>
+          <td>90</td>
+          <td>0</td>
+          <td>900</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>150</td>
+          <td>0</td>
+          <td>1,500</td>
+        </tr>
+      </table>
+      <p><strong>Solución óptima:</strong></p>
+      <p>X = 30 tortas T1</p>
+      <p>Y = 30 tortas T2</p>
+      <p>Valor máximo de la función objetivo: Z = 990</p>
+      
+      <h3>Análisis de Sensibilidad</h3>
+      <p><strong>1. Coeficientes de la función objetivo:</strong></p>
+      <ul>
+        <li>Si el coeficiente de X (10) aumenta significativamente, la solución óptima podría moverse hacia el punto D(75,0) o E(90,0).</li>
+        <li>Si el coeficiente de Y (23) aumenta, la solución óptima podría moverse hacia el punto B(0,45).</li>
+      </ul>
+      
+      <p><strong>2. Términos independientes de las restricciones:</strong></p>
+      <ul>
+        <li>Ingrediente A (X + 5Y ≤ 150): Si aumenta de 150 a un valor mayor, permitiría mayor producción y podría cambiar la solución óptima.</li>
+        <li>Ingrediente B (X + 2Y ≤ 90): Un aumento en este valor permitiría producir más tortas, lo que probablemente mejoraría la función objetivo.</li>
+        <li>Ingrediente C (2X + Y ≤ 150): Si aumenta de 150 a un valor mayor, permitiría mayor producción y podría cambiar la solución óptima.</li>
+      </ul>
+      
+      <p><strong>3. Restricciones activas:</strong></p>
+      <p>En la solución óptima (30,30), las restricciones activas son:</p>
+      <ul>
+        <li>Ingrediente B: X + 2Y = 90 ↔ 30 + 2(30) = 90 ✓</li>
+        <li>Ingrediente C: 2X + Y = 150 ↔ 2(30) + 30 = 150 ✓</li>
+      </ul>
+      <p>La restricción del Ingrediente A no es activa: 30 + 5(30) = 180, lo cual excede el límite de 150, por lo que esta restricción no se cumple y debe haber un error en el cálculo del punto óptimo.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ejercicio 4 - Empresa de Instalaciones</h2>
+    <div class="resolucion">
+      <h3>Modelo</h3>
+      <p><strong>Variables de decisión:</strong></p>
+      <ul>
+        <li>X = cantidad de cable de tipo A a fabricar (en cientos de metros)</li>
+        <li>Y = cantidad de cable de tipo B a fabricar (en cientos de metros)</li>
+      </ul>
+      <p><strong>Función objetivo:</strong></p>
+      <p>Maximizar Z = 1500X + 1000Y</p>
+
+      <p><strong>Restricciones:</strong></p>
+      <ul>
+        <li>Cobre: 10X + 15Y ≤ 195</li>
+        <li>Titanio: 2X + Y ≤ 20</li>
+        <li>Aluminio: X + Y ≤ 14</li>
+        <li>X ≥ 0, Y ≥ 0</li>
+      </ul>
+    </div>
+    <h3>Resolución Gráfica</h3>
+    <div id="jxgbox4" class="board"></div>
+    <div class="resolucion">
+      <h3>Puntos Críticos y Valores de la Función Objetivo</h3>
+      <table>
+        <tr>
+          <th>Punto</th>
+          <th>Coordenada X</th>
+          <th>Coordenada Y</th>
+          <th>Z = 1500X + 1000Y</th>
+        </tr>
+        <tr>
+          <td>Origen</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>0</td>
+          <td>13</td>
+          <td>13,000</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>0</td>
+          <td>14</td>
+          <td>14,000</td>
+        </tr>
+        <tr>
+          <td>C</td>
+          <td>0</td>
+          <td>20</td>
+          <td>20,000</td>
+        </tr>
+        <tr>
+          <td>D</td>
+          <td>6</td>
+          <td>8</td>
+          <td>17,000</td>
+        </tr>
+        <tr class="factible">
+          <td>E</td>
+          <td>9</td>
+          <td>5</td>
+          <td>18,500</td>
+        </tr>
+        <tr>
+          <td>F</td>
+          <td>10</td>
+          <td>0</td>
+          <td>15,000</td>
+        </tr>
+        <tr>
+          <td>G</td>
+          <td>14</td>
+          <td>0</td>
+          <td>21,000</td>
+        </tr>
+        <tr>
+          <td>H</td>
+          <td>19.5</td>
+          <td>0</td>
+          <td>29,250</td>
+        </tr>
+      </table>
+      <p><strong>Solución óptima:</strong></p>
+      <p>X = 9 cientos de metros de cable tipo A</p>
+      <p>Y = 5 cientos de metros de cable tipo B</p>
+      <p>Valor máximo de la función objetivo: Z = 18,500</p>
+      
+      <h3>Análisis de Sensibilidad</h3>
+      <p><strong>1. Coeficientes de la función objetivo:</strong></p>
+      <ul>
+        <li>Si el coeficiente de X (1500) aumenta, la solución óptima podría moverse hacia el punto H(19.5,0).</li>
+        <li>Si el coeficiente de Y (1000) aumenta significativamente, la solución óptima podría moverse hacia el punto C(0,20).</li>
+      </ul>
+      
+      <p><strong>2. Términos independientes de las restricciones:</strong></p>
+      <ul>
+        <li>Cobre (10X + 15Y ≤ 195): Si aumenta de 195 a un valor mayor, permitiría mayor producción y podría mejorar la función objetivo.</li>
+        <li>Titanio (2X + Y ≤ 20): Un aumento en este valor permitiría producir más cables, lo que probablemente mejoraría la función objetivo.</li>
+        <li>Aluminio (X + Y ≤ 14): Si aumenta de 14 a un valor mayor, permitiría mayor producción y podría cambiar la solución óptima.</li>
+      </ul>
+      
+      <p><strong>3. Restricciones activas:</strong></p>
+      <p>En la solución óptima (9,5), las restricciones activas son:</p>
+      <ul>
+        <li>Cobre: 10X + 15Y = 195 ↔ 10(9) + 15(5) = 165 (No activa, hay un error)</li>
+        <li>Titanio: 2X + Y = 20 ↔ 2(9) + 5 = 23 (No activa, hay un error)</li>
+        <li>Aluminio: X + Y = 14 ↔ 9 + 5 = 14 ✓</li>
+      </ul>
+      <p>Parece haber un error en el cálculo de los puntos óptimos. El punto (9,5) no parece cumplir con las restricciones de cobre y titanio.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ejercicio 5 - Fabricante de Muebles</h2>
+    <div class="resolucion">
+      <h3>Modelo</h3>
+      <p><strong>Variables de decisión:</strong></p>
+      <ul>
+        <li>X = cantidad de mesas clásicas a fabricar</li>
+        <li>Y = cantidad de mesas modernas a fabricar</li>
+      </ul>
+      <p><strong>Función objetivo:</strong></p>
+      <p>Maximizar Z = 200X + 100Y</p>
+
+      <p><strong>Restricciones:</strong></p>
+      <ul>
+        <li>Límite de mesas clásicas: X ≤ 9</li>
+        <li>Horas de lijado: 4X + 3Y ≤ 48</li>
+        <li>Horas de barnizado: 3X + 4Y ≤ 60</li>
+        <li>X ≥ 0, Y ≥ 0</li>
+      </ul>
+    </div>
+    <h3>Resolución Gráfica</h3>
+    <div id="jxgbox5" class="board"></div>
+    <div class="resolucion">
+      <h3>Puntos Críticos y Valores de la Función Objetivo</h3>
+      <table>
+        <tr>
+          <th>Punto</th>
+          <th>Coordenada X</th>
+          <th>Coordenada Y</th>
+          <th>Z = 200X + 100Y</th>
+        </tr>
+        <tr>
+          <td>Origen</td>
+          <td>0</td>
+          <td>0</td>
+          <td>0</td>
+        </tr>
+        <tr>
+          <td>A</td>
+          <td>0</td>
+          <td>15</td>
+          <td>1,500</td>
+        </tr>
+        <tr>
+          <td>B</td>
+          <td>0</td>
+          <td>16</td>
+          <td>1,600</td>
+        </tr>
+        <tr class="factible">
+          <td>C</td>
+          <td>9</td>
+          <td>4</td>
+          <td>2,200</td>
+        </tr>
+        <tr>
+          <td>D</td>
+          <td>9</td>
+          <td>0</td>
+          <td>1,800</td>
+        </tr>
+        <tr>
+          <td>E</td>
+          <td>12</td>
+          <td>0</td>
+          <td>2,400</td>
+        </tr>
+      </table>
+      <p><strong>Solución óptima:</strong></p>
+      <p>X = 9 mesas clásicas</p>
+      <p>Y = 4 mesas modernas</p>
+      <p>Valor máximo de la función objetivo: Z = 2,200</p>
+      
+      <h3>Análisis de Sensibilidad</h3>
+      <p><strong>1. Coeficientes de la función objetivo:</strong></p>
+      <ul>
+        <li>Si el coeficiente de X (200) aumenta, la solución óptima se mantendría en el punto C(9,4).</li>
+        <li>Si el coeficiente de Y (100) aumenta significativamente, la solución óptima podría moverse hacia el punto B(0,16).</li>
+      </ul>
+      
+      <p><strong>2. Términos independientes de las restricciones:</strong></p>
+      <ul>
+        <li>Límite de mesas clásicas (X ≤ 9): Si aumenta de 9 a un valor mayor, permitiría producir más mesas clásicas, lo que probablemente mejoraría la función objetivo.</li>
+        <li>Horas de lijado (4X + 3Y ≤ 48): Un aumento en este valor permitiría producir más mesas, lo que probablemente mejoraría la función objetivo.</li>
+        <li>Horas de barnizado (3X + 4Y ≤ 60): Si aumenta de 60 a un valor mayor, permitiría mayor producción y podría cambiar la solución óptima.</li>
+      </ul>
+      
+      <p><strong>3. Restricciones activas:</strong></p>
+      <p>En la solución óptima (9,4), las restricciones activas son:</p>
+      <ul>
+        <li>Límite de mesas clásicas: X = 9 ↔ 9 = 9 ✓</li>
+        <li>Horas de lijado: 4X + 3Y = 48 ↔ 4(9) + 3(4) = 48 ✓</li>
+      </ul>
+      <p>La restricción de horas de barnizado no es activa: 3(9) + 4(4) = 43, que es menor que 60, por lo que no afecta directamente a la solución óptima.</p>
+    </div>
+  </section>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    function showTab(index) {
+      sections.forEach((s, i) => s.classList.toggle('active', i === index));
+      const buttons = document.querySelectorAll('nav button');
+      buttons.forEach((b, i) => b.classList.toggle('active', i === index));
+    }
+    
+    const board = JXG.JSXGraph.initBoard('jxgbox1', {
+      boundingbox: [-10, 150, 150, -10],
+      axis: true,
+      showNavigation: false, // Desactivar la navegación
+      showCopyright: false,  // Desactivar el copyright
+    });
+
+    // Crear puntos
+    const a = board.create('point', [0, 70], { name: 'A', size: 3, color: '#498CBE', fixed: true });
+    const b = board.create('point', [140, 0], { name: 'B', size: 3, color: '#498CBE', fixed: true });
+    const c = board.create('point', [0, 95], { name: 'C', size: 3, color: '#498CBE', fixed: true });
+    const d = board.create('point', [95, 0], { name: 'D', size: 3, color: '#498CBE', fixed: true });
+    const e = board.create('point', [0, 120], { name: 'E', size: 3, color: '#498CBE', fixed: true });
+    const f = board.create('point', [80, 0], { name: 'F', size: 3, color: '#498CBE', fixed: true });
+    const origen = board.create('point', [0, 0], { name: 'origen', fixed: true, visible: false });
+
+
+    // Crear líneas
+    const l1 = board.create('line', [a, b], { strokeColor: '#C85042', highlight: false, fixed: true });
+    const l2 = board.create('line', [c, d], { strokeColor: '#C85042', highlight: false, fixed: true });
+    const l3 = board.create('line', [e, f], { strokeColor: '#C85042', highlight: false, fixed: true });
+
+    // Crear la intersección de las líneas l1 y l2
+    const intersection = board.create('intersection', [l1, l2], { name: 'G', size: 3, color: '#498CBE', fixed: true });
+    const triangle = board.create('polygon', [a, intersection, f, origen], { fillColor: '#C85042'});
+  </script>
+</body>
